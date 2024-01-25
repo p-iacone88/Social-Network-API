@@ -11,5 +11,11 @@ const app = express();
 // Middleware to parse incoming requests 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+
 // use imported routes in app
 app.use(routes); 
+
+app.listen(PORT, () => {
+    console.log(`API server running on port ${PORT}!`);
+  });
