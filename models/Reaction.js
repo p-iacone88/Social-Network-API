@@ -1,4 +1,5 @@
 const { Schema, Types } = require('mongoose');
+const moment = require('moment');
 
 const reactionSchema = new Schema({
   reactionId: {
@@ -17,7 +18,9 @@ const reactionSchema = new Schema({
   createdAt: {
     type: Date,
     default: Date.now,
-    get: timestamp => new Date(timestamp).toLocaleDateString()
+    get: function (timestamp) {
+      return moment(timestamp).format('YYYY-MM-DD HH:mm:ss');
+    },
   }
 },
 {
