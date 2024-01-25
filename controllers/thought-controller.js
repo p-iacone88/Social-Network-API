@@ -26,10 +26,19 @@ const ThoughtController = {
 
   async createThought(req, res) {
     try {
+      // require valid user
+      const userData = await User.findOne(
+        {username: req.body.username}
+      );
+      if (!userData) { 
+        res.json('No user with this username!');
+        return;
+      }
       const thought = await Thought.create(req.body);
+
       res.status(201).json(thought);
     } catch (err) {
-      res.status(500).json(err);
+      res.status(500).json('No user with this username');
     }
   },
 
