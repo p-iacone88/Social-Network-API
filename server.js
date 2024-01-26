@@ -1,5 +1,5 @@
 // import express library
-const express =  require('express');
+const express = require('express');
 // import database connection configuration
 const db = require('./config/connection');
 //import routes module
@@ -14,8 +14,8 @@ app.use(express.json());
 
 
 // use imported routes in app
-app.use(routes); 
+app.use(routes);
 
 app.listen(PORT, () => {
-    console.log(`API server running on port ${PORT}!`);
-  });
+  console.log(`API server running on port ${PORT}!`);
+});

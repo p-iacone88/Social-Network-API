@@ -1,23 +1,28 @@
 const { User } = require('../models');
 
+// Controller object containing functions for handling user-related operations
 const UserController = {
+  // Function to get all users
   getAllUsers(req, res) {
     User.find({})
-      .then(userData => res.json(userData))
+      .then(userData => res.json(userData)) // Respond with user data if found
       .catch(err => res.status(500).json(err));
   },
+  // Function to get a user by ID
   getUserById(req, res) {
     User.findById(req.params.userId)
-      .then(userData => res.json(userData))
+      .then(userData => res.json(userData)) // Respond with user data if found
       .catch(err => res.status(500).json(err));
   },
+  // Function to create a new user
   createUser(req, res) {
     User.create(req.body)
       .then(userData => res.json(userData))
       .catch(err => res.status(500).json(err));
   },
+  // Function to update a user by ID
   updateUserById(req, res) {
-    User.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
+    User.findOneAndUpdate(req.params.id, req.body, { new: true })
       .then(userData => {
         if (!userData) {
           return res.status(404).json({ message: 'User not found' });
@@ -26,8 +31,9 @@ const UserController = {
       })
       .catch(err => res.status(500).json(err));
   },
+  // Function to delete a user by ID
   deleteUserById(req, res) {
-    User.findOneAndDelete({ _id: req.params.id })
+    User.findOneAndDelete(req.params.id)
       .then(userData => {
         if (!userData) {
           return res.status(404).json({ message: 'User not found' });
@@ -36,6 +42,7 @@ const UserController = {
       })
       .catch(err => res.status(500).json(err));
   },
+  // Function to add a friend for user
   addFriend(req, res) {
     User.findOneAndUpdate(
       { _id: req.params.userId },
@@ -50,6 +57,7 @@ const UserController = {
       })
       .catch(err => res.status(500).json(err));
   },
+  // Function to remove a friend for a user
   removeFriend({ params }, res) {
     User.findOneAndUpdate(
       { _id: params.userId },

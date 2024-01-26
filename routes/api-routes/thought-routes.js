@@ -7,8 +7,10 @@ const {
   deleteThought,
   updateThoughtById,
   createReaction,
-  deleteReaction,  
+  deleteReaction,
 } = require('../../controllers/thought-controller');
+
+// Routes for CRUD operations for thoughts
 
 router.route('/').get(getAllThoughts).post(createThought);
 
