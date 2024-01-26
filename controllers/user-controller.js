@@ -17,7 +17,7 @@ const UserController = {
       .catch(err => res.status(500).json(err));
   },
   updateUserById(req, res) {
-    User.findOneAndUpdate(req.params.id, req.body, { new: true })
+    User.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
       .then(userData => {
         if (!userData) {
           return res.status(404).json({ message: 'User not found' });
@@ -27,7 +27,7 @@ const UserController = {
       .catch(err => res.status(500).json(err));
   },
   deleteUserById(req, res) {
-    User.findOneAndDelete(req.params.id)
+    User.findOneAndDelete({ _id: req.params.id })
       .then(userData => {
         if (!userData) {
           return res.status(404).json({ message: 'User not found' });
@@ -39,7 +39,7 @@ const UserController = {
   addFriend(req, res) {
     User.findOneAndUpdate(
       { _id: req.params.userId },
-      { $addToSet: { friends: req.body.friendId || req.params.friendId} },
+      { $addToSet: { friends: req.body.friendId || req.params.friendId } },
       { new: true }
     )
       .then(userData => {
